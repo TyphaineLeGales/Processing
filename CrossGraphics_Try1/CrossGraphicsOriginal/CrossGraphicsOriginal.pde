@@ -40,7 +40,7 @@ void draw() {
    
    // push();
     //translate(width/1.5,height/4);
-   // translate(-i,i);
+   
    // rotate(-sin(i/TWO_PI*density));
     //initShape(0, 0);
    // fill(255);
