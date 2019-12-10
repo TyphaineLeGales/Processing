@@ -1,32 +1,29 @@
 import geomerative.*;
-
+boolean isFirst = true;
+float density = 0.35;
+int count = 10;
+int spacing =5;
 RPoint[] points = new RPoint[12];
-RPolygon shape;
-
-int cx = 250;
-int cy = 250;
-int r = 100;
+RPolygon shape, clippedShape;
+RPolygon[] clippedShapes = new RPolygon[count];
 
 void setup() {
   size(750, 700);
-   RG.init(this);
+  RG.init(this);
   rectMode(CENTER);
   background(255);
   noFill();
   noLoop();
+  eliminateIntersections();
 }
 
 void draw() {
-  
-  float t = millis()/1000.0f;
-  int x = (int)(cx+r*cos(t));
-  int y = (int)(cy+r*sin(t));
-  initShape(width/2,height/2);
-  for(int i = 0; i<points.length; i++) {
-    ellipse(points[i].x, points[i].y, 3, 3);
+   for(int i = 0; i< count; i++){
+     noFill();
+     
+     clippedShapes[i].draw();
   }
-  shape = new RPolygon(points);
-  shape.draw();
+ 
 }
 
 void initShape(int x, int y){
@@ -43,4 +40,20 @@ void initShape(int x, int y){
   points[9] = new RPoint(-20+x, 70+y);
   points[10] = new RPoint(-20+x, 50+y);
   points[11] = new RPoint(0+x, 50+y); 
+}
+
+void eliminateIntersections() {
+
+ for(int i=0; i<count; i+=1){
+    initShape(i*spacing,i*spacing);
+    shape = new RPolygon(points);
+    clippedShapes[i] = shape;
+    //if(isFirst == false) {
+       //for(int j = i; j>0; j--) {
+          //// clippedShapes[i-j] = clippedShapes[i-j].diff(clippedShapes[i]);   
+       //}
+    // } else {
+        //isFirst = false;
+    // }
+   }
 }

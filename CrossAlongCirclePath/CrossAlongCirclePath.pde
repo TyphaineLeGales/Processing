@@ -13,7 +13,7 @@ void setup() {
   rectMode(CENTER);
   background(255);
   noFill();
-  //noLoop();
+  noLoop();
 }
 
 void draw() {
@@ -26,7 +26,7 @@ void draw() {
     shape = new RPolygon(points);
     fill(255);
     shape.draw();
- }
+   }
     
  }
   
