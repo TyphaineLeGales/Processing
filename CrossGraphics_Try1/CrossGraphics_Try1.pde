@@ -25,7 +25,7 @@ void setup() {
 
 void draw() {
 
- for(int i=0; i<10; i+=2){
+ for(int i=0; i<300; i+=2){
     //push();
     //translate(width/4, height/4);
     //translate(i,i);
@@ -46,11 +46,11 @@ void draw() {
     //get model x/y coord after translation
    
    if(isFirst == false) {
-   fill(255, 0, 0);
+  fill(255);
     intersection = prevShape.intersection(currShape);
     intersection.draw();
      clippedShape = prevShape.diff(intersection);
-    fill(0,255,0);
+   // fill(0,255,0);
    // intersection.draw();
     // fill(255,0,0);
    clippedShape.draw();

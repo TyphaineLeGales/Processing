@@ -3,16 +3,16 @@ import processing.pdf.*;
 
 Cross currCross;
 boolean isFirst = true;
-int count = 5;
-int spacing = 25;
+int count = 10;
+int spacing = 3;
 
-RPolygon prevShape,currShape, intersection, clippedShape;
-RPolygon[] clippedShapes = new RPolygon[50];
+RPolygon currShape, clippedShape;
+RPolygon[] clippedShapes = new RPolygon[count];
 
 void setup() {
- //size(750, 700, PDF, "crossGraphicsTry_4.pdf");
+  size(250, 200, PDF, "OclludedCross.pdf");
   //size(750, 700, PDF, "crossGraphicsTry_3.svg");
-  size(750, 700);
+  size(250, 200);
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -24,6 +24,7 @@ void setup() {
 void draw() {
    translate(width/1.5,height/4);
    drawShapes();
+   exit();
 }
 
 void drawShapes(){
@@ -31,8 +32,6 @@ void drawShapes(){
       noFill();
      clippedShapes[i].draw();
   }
-   
-  
 }
 
 void eliminateIntersections() {
@@ -44,20 +43,9 @@ void eliminateIntersections() {
     clippedShapes[i] = currShape;
     print(i);
     if(isFirst == false) {
-      intersection = clippedShapes[i-1].intersection(clippedShapes[i]);
-      clippedShapes[i-1] = clippedShapes[i-1].diff(intersection);
-      //test intersection with previous shapes => for each element of the index until currShape index
-        //for(int j = 0; j<i; j++) {
-          //prevShape = clippedShapes[j];
-          //intersection = prevShape.intersection(currShape);
-          //fill(0);
-          //intersection.draw();
-         //if polygon superior intersects a lower polygon, modify lower polygon
-        // if(intersection != null) {
-            //clippedShapes[j] = prevShape.diff(intersection);
-           // print(intersection);
-         // }      
-       // }
+       for(int j = i; j>0; j--) {
+           clippedShapes[i-j] = clippedShapes[i-j].diff(clippedShapes[i]);   
+       }
      } else {
         isFirst = false;
      }
