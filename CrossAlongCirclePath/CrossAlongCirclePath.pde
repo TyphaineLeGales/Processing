@@ -13,21 +13,23 @@ void setup() {
   rectMode(CENTER);
   background(255);
   noFill();
-  noLoop();
+  //noLoop();
 }
 
 void draw() {
   
-  float t = millis()/1000.0f;
-  int x = (int)(cx+r*cos(t));
-  int y = (int)(cy+r*sin(t));
-  initShape(width/2,height/2);
-  for(int i = 0; i<points.length; i++) {
-    ellipse(points[i].x, points[i].y, 3, 3);
-  }
-  shape = new RPolygon(points);
-  shape.draw();
-}
+ //float t = millis()/1000.0f;
+ for(float t = 0; t < 10; t+= 0.05 ) {
+   int x = (int)(cx+r*cos(t));
+    int y = (int)(cy+r*sin(t));
+    initShape(x,y);
+    shape = new RPolygon(points);
+    fill(255);
+    shape.draw();
+ }
+    
+ }
+  
 
 void initShape(int x, int y){
  
