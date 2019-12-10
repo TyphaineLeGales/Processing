@@ -8,12 +8,12 @@ class Cross {
   RPoint[] points = new RPoint[12];
   
   //constructor
-  Cross(int x,int y) {
+  Cross(float x,float y) {
     setPoints(x, y);
   }
 
   //methods
-  void setPoints(int x, int y) {
+  void setPoints(float x, float y) {
     points[0] = new RPoint(0+x, 30+y);
     points[1] = new RPoint(20+x, 30+y);
     points[2] = new RPoint(20+x, 50+y);

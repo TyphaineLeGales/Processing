@@ -25,49 +25,30 @@ void setup() {
 
 void draw() {
 
- for(int i=0; i<300; i+=2){
-    //push();
-    //translate(width/4, height/4);
-    //translate(i,i);
-    //rotate(sin(angle*i/100+radians(100)));
-    // rotate(sin(i/TWO_PI*0.5+radians(10)));
-    //rect(0,0, 50, 50);
-    //initShape(0);
-    //pop();
+ for(int i=0; i<300; i+=1){
+    push();
+    translate(width/4, height/4);
+    translate(i,i);
+    rotate(sin(i/TWO_PI*0.5+radians(100)));
+    initShape(0, 0);
+    fill(255);
+    currShape.draw();
+    pop();
    
     push();
     translate(width/1.5,height/4);
     translate(-i,i);
-    rotate(-sin(i/TWO_PI*0.5+radians(10)));
-     
+    rotate(-sin(i/TWO_PI*0.5+radians(100)));
     
     initShape(0, 0);
+    fill(255);
+    currShape.draw();
+    pop();
+ }
     
     //get model x/y coord after translation
    
-   if(isFirst == false) {
-  fill(255);
-    intersection = prevShape.intersection(currShape);
-    intersection.draw();
-     clippedShape = prevShape.diff(intersection);
-   // fill(0,255,0);
-   // intersection.draw();
-    // fill(255,0,0);
-   clippedShape.draw();
-     
-    } else {
-     fill(0);
-      currShape.draw();
-      isFirst = false;
-   }
-   
-   //currShape = prevShape
-    prevPoints = currShape.getPoints();
-    prevShape = new RPolygon(prevPoints);
-    pop();
 
-  }
- // exit();
 }
 
 void initShape(int x, int y){
