@@ -6,6 +6,8 @@ int x=0;
 int y=0;
 int t=0;
 
+float density = 0.35;
+
 boolean isFirst = true;
 
 RPolygon prevShape,currShape, intersection, clippedShape;
@@ -20,35 +22,32 @@ void setup() {
   rectMode(CENTER);
   background(255);
   noFill();
+  noLoop();
  // noSmooth();
 }
 
 void draw() {
 
- for(int i=0; i<300; i+=1){
+ for(int i=0; i<350; i+=1){
     push();
-    translate(width/4, height/4);
+   // translate(width/4, height/2);
     translate(i,i);
-    rotate(sin(i/TWO_PI*0.5+radians(100)));
+    rotate(sin(i/TWO_PI*density));
     initShape(0, 0);
     fill(255);
     currShape.draw();
     pop();
    
-    push();
-    translate(width/1.5,height/4);
-    translate(-i,i);
-    rotate(-sin(i/TWO_PI*0.5+radians(100)));
-    
-    initShape(0, 0);
-    fill(255);
-    currShape.draw();
-    pop();
+   // push();
+    //translate(width/1.5,height/4);
+   // translate(-i,i);
+   // rotate(-sin(i/TWO_PI*density));
+    //initShape(0, 0);
+   // fill(255);
+   // currShape.draw();
+   // pop();
  }
     
-    //get model x/y coord after translation
-   
-
 }
 
 void initShape(int x, int y){
