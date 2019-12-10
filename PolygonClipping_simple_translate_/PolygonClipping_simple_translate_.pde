@@ -8,8 +8,8 @@ int count = 50;
 int spacing =3;
 
 
-float translateX = width*4;
-float translateY = height*1.5;
+float translateX = width*3;
+float translateY = height/5;
 
 RPolygon currShape, clippedShape;
 RPolygon[] clippedShapes = new RPolygon[count];
@@ -17,7 +17,7 @@ RPolygon[] clippedShapes = new RPolygon[count];
 void setup() {
   //size(800, 1240, PDF, "OclludedCross_Translate4.pdf");
   //size(750, 700, PDF, "crossGraphicsTry_3.svg");
-  size(800, 1240);
+  size(750, 700);
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -49,7 +49,7 @@ void eliminateIntersections() {
   
    //y = i*spacing+height/4
    float rotate = sin(i/TWO_PI*density);
-    currCross = new Cross((-i*spacing+translateX)*cos(0) - (i*spacing+translateY)*(sin(rotate)),(-i*spacing+translateX)*sin(rotate) + (i*spacing+translateY)*(cos(0))); 
+    currCross = new Cross((-i*spacing+translateX)*cos(0) - (i*spacing+translateY)*(sin(rotate) ),(-i*spacing+translateX)*sin(rotate) + (i*spacing+translateY)*(cos(0))); 
     currShape = currCross.makeShape(); 
     clippedShapes[i] = currShape;
     if(isFirst == false) {

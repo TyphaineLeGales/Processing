@@ -29,14 +29,14 @@ void setup() {
 void draw() {
 
  for(int i=0; i<350; i+=1){
-    push();
+    pushMatrix();
    // translate(width/4, height/2);
     translate(i,i);
     rotate(sin(i/TWO_PI*density));
     initShape(0, 0);
     fill(255);
     currShape.draw();
-    pop();
+    popMatrix();
    
    // push();
     //translate(width/1.5,height/4);
