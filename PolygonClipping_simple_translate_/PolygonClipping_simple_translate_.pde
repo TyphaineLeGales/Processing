@@ -1,15 +1,14 @@
 import geomerative.*;
 import processing.pdf.*;
 
-int x=0;
-int y=0;
-int t=0;
 Cross currCross;
 boolean isFirst = true;
 boolean isLast = false;
+int maxCrosses = 50;
 int count = 60;
+int increment = 15;
 RPolygon prevShape,currShape, intersection, clippedShape;
-//Cross[] totalPolygons = new Cross[count];
+RPolygon[] clippedShapes = new RPolygon[50];
 
 void setup() {
  //size(750, 700, PDF, "crossGraphicsTry_4.pdf");
@@ -19,35 +18,39 @@ void setup() {
   rectMode(CENTER);
   background(255);
   noFill();
- // noSmooth();
+   translate(width/1.5,height/4);
+   eliminateIntersections();
+   drawShapes();
 }
 
-void draw() {
+void drawShapes(){
+  for(int i = 0; i< maxCrosses; i++){
+     clippedShapes[i].draw();
+  }
+   
+  
+}
 
- for(float i=0; i<count; i+=25){
-    
+void eliminateIntersections() {
+
+ for(int i=0; i<count; i+=increment){
    
-   
-    push();
-    translate(width/1.5,height/4);
     currCross = new Cross(i, i, 2); 
     currShape = currCross.makeShape(); 
-    fill(0);
-    currShape.draw();
-  // if(isFirst == false && isLast == false) {
-   // intersection = prevShape.intersection(currShape);
-    // clippedShape = prevShape.diff(intersection);
-   // intersection.draw();
-    // fill(255,0,0);
-   //  clippedShape.draw();
-     
-   // } else {
-    //  isFirst = false;
-   //}
-   
-   // prevShape = new RPolygon(currShape);
-    pop();
-
+    clippedShapes[i] = currShape;
+    
+      for(int j = 0; j<i; j++) {
+        prevShape = clippedShapes[j];
+        print(j);
+        intersection = prevShape.intersection(currShape);
+        
+        //if polygon superior intersects a lower polygon, modify lower polygon
+        if(intersection != null) {
+           clippedShapes[j] = prevShape.diff(intersection);
+        }      
+        // Store intersections of shape with previous shapes (interation over array totalCrosses)
+        // if empty draw clippedShape
+        // if elements in it clippedShape = clippedShape.diff(intersection) 
+      }
   }
- // exit();
 }
