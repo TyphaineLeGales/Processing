@@ -1,4 +1,5 @@
 import geomerative.*;
+import processing.pdf.*;
 
 RPoint[] points = new RPoint[12];
 RPolygon shape;
@@ -9,25 +10,30 @@ int r = 100;
 
 void setup() {
   size(750, 700);
+   //size(750, 700, PDF, "CrossAlongCircle.pdf");
    RG.init(this);
   rectMode(CENTER);
   background(255);
   noFill();
-  noLoop();
+  //noLoop();
 }
 
 void draw() {
   
  //float t = millis()/1000.0f;
- for(float t = 0; t < 10; t+= 0.05 ) {
-   int x = (int)(cx+r*cos(t));
-    int y = (int)(cy+r*sin(t));
+ for(float t = 0; t < 125; t+= 1 ) {
+   int x = (int)(cx+r*cos(t*0.05));
+    int y = (int)(cy+r*sin(t*0.05));
     initShape(x,y);
     shape = new RPolygon(points);
     fill(255);
     shape.draw();
+    //exit();
    }
     
+ }
+ 
+ void createShapeArray(){
  }
   
 
