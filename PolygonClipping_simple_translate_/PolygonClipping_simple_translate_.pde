@@ -3,9 +3,9 @@ import processing.pdf.*;
 
 Cross currCross;
 boolean isFirst = true;
+int count = 300;
+int spacing =2;
 float density = 0.35;
-int count = 50;
-int spacing =3;
 
 
 float translateX = width*3;
@@ -15,9 +15,9 @@ RPolygon currShape, clippedShape;
 RPolygon[] clippedShapes = new RPolygon[count];
 
 void setup() {
-  //size(800, 1240, PDF, "OclludedCross_Translate4.pdf");
+ size(850, 700, PDF, "RotatedOccludedCross.pdf");
   //size(750, 700, PDF, "crossGraphicsTry_3.svg");
-  size(750, 700);
+ // size(850, 800);
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -30,28 +30,26 @@ void setup() {
 void draw() {
    scale(2);
    drawShapes();
-   //exit();
+   exit();
 }
 
 void drawShapes(){
+  translate(width/3, 5);
   for(int i = 0; i< count; i++){
      noFill();
      clippedShapes[i].draw();
   }
+ 
 }
 
 void eliminateIntersections() {
 
  for(int i=0; i<count; i+=1){
-   //apply tranformation matrix to coord
-   // rotate(-sin(i/TWO_PI*density));
-   //x = -i*spacing+ width/3
-  
-   //y = i*spacing+height/4
-   float rotate = sin(i/TWO_PI*density);
-    currCross = new Cross((-i*spacing+translateX)*cos(0) - (i*spacing+translateY)*(sin(rotate) ),(-i*spacing+translateX)*sin(rotate) + (i*spacing+translateY)*(cos(0))); 
+    currCross = new Cross(0 ,0); 
     currShape = currCross.makeShape(); 
     clippedShapes[i] = currShape;
+    currShape.translate(i,i);
+    currShape.rotate(cos(i/TWO_PI*density));
     if(isFirst == false) {
        for(int j = i; j>0; j--) {
            clippedShapes[i-j] = clippedShapes[i-j].diff(clippedShapes[i]);   
