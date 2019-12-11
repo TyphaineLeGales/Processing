@@ -4,7 +4,7 @@ import processing.pdf.*;
 RPoint[] points = new RPoint[12];
 RPolygon currShape, clippedShape, diff;
 
-int count = 123;
+int count = 126;
 RPolygon[] clippedShapes = new RPolygon[count];
 boolean isFirst = true;
 boolean isLast = false;
@@ -43,7 +43,7 @@ void createShapeArray(){
     currCross = new Cross((float)(cx+r*cos(t*0.05)),(float)(cy+r*sin(t*0.05))); 
     currShape = currCross.makeShape(); 
     clippedShapes[t] = currShape;
-    if(isFirst == false && t< count-9) {
+    if(isFirst == false && t< count-13) {
        for(int j = t; j>0; j--) {
            clippedShapes[t-j] = clippedShapes[t-j].diff(clippedShapes[t]);   
        }
@@ -52,12 +52,21 @@ void createShapeArray(){
      }
      
    }
-    for(int e = 0; e < 11; e++){
-    
-      diff = clippedShapes[count-1].diff(clippedShapes[e]);
-     
-    }
-     fill(255, 0, 0);
-     clippedShapes[count-1].draw();
+   
+   correctEndClipping();
        
+}
+
+void correctEndClipping () {
+   for(int e = 0; e < 13; e++){
+     for(int k = 13; k > 0; k--){
+       clippedShapes[count-k] = clippedShapes[count-k].diff(clippedShapes[e]);   
+     } 
+   }
+   
+   for(int m = 18; m>1; m--){
+     for(int n = m-1; n>1; n-- ){
+       clippedShapes[count-m] = clippedShapes[count-m].diff(clippedShapes[count-n]);
+     }
+   }
 }
