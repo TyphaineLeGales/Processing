@@ -9,15 +9,17 @@ RPolygon[] clippedShapes = new RPolygon[count];
 boolean isFirst = true;
 boolean isLast = false;
 Cross currCross;
-int cx = 250;
-int cy = 250;
+int cx = 240;
+int cy = 240;
 int r = 100;
-int x;
-int y;
+int cols, rows;
+int gridScale = 100;
 
 void setup() {
   size(550, 700);
-   //size(750, 700, PDF, "CrossAlongCircle.pdf");
+  //size(550, 700, PDF, "EndlessCrossAlongCircle.pdf");
+  cols = width/gridScale;
+  rows = height/gridScale;
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -29,13 +31,18 @@ void setup() {
 }
 
 void draw() {
-    
+   //draw grid
+ 
+  //draw circle
   for(int i=0; i<count; i+=1){
    noFill();
+   stroke(0,0,255);
     clippedShapes[i].draw();    
-  } 
+  }
+  
+ 
 
-     //exit();
+    // exit();
 }
  
 void createShapeArray(){
@@ -69,4 +76,19 @@ void correctEndClipping () {
        clippedShapes[count-m] = clippedShapes[count-m].diff(clippedShapes[count-n]);
      }
    }
+   //fill(255, 0, 0);
+   // clippedShapes[0].draw();
+   // clippedShapes[count/2].draw();
+}
+
+void grid(){
+   for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      int x = i*gridScale;
+      int y = j*gridScale;
+      stroke(255, 0, 0);
+      rect(x+gridScale/2, y+gridScale/2,gridScale, gridScale);
+    }
+ }
+
 }
