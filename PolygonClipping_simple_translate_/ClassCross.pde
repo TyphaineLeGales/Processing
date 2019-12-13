@@ -33,7 +33,8 @@ class Cross {
   }
   
   public RPolygon makeShape(){
-    return currShape = new RPolygon(points); 
+    return currShape1 = new RPolygon(points); 
+     
   }
   
 }

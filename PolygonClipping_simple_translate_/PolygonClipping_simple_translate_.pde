@@ -1,9 +1,9 @@
 import geomerative.*;
 import processing.pdf.*;
 
-Cross currCross;
+Cross currCross1, currCross2;
 boolean isFirst = true;
-int count =350;
+int count =300;
 int spacing =2;
 float density = 0.55;
 
@@ -13,13 +13,13 @@ float translateY = height/5;
 
 int p =0;
 
-RPolygon currShape, clippedShape;
+RPolygon currShape1, currShape2,clippedShape;
 RPolygon[] clippedShapes = new RPolygon[count];
 
 void setup() {
- //size(850, 700, PDF, "RotatedOccludedCross_003.pdf");
-  //size(750, 700, PDF, "crossGraphicsTry_3.svg");
-  size(850, 800);
+ //size(900, 800, PDF, "CrossFinal.pdf");
+  //size(750, 700, PDF, "crossGraphicsFinal_3.svg");
+  size(900, 800);
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -36,7 +36,6 @@ void draw() {
 }
 
 void drawShapes(){
-  translate(width/4.5,0);
   for(int i = 0; i< count; i++){
      noFill();
      clippedShapes[i].draw();
@@ -47,12 +46,14 @@ void drawShapes(){
 void eliminateIntersections() {
 
  for(int i=0; i<count; i+=1){
-    currCross = new Cross(0 ,0); 
-    currShape = currCross.makeShape(); 
-    clippedShapes[i] = currShape;
+    currCross1 = new Cross(0 ,0);
+    currCross2 = new Cross(0 ,0); 
+    currShape1 = currCross1.makeShape(); 
+    currShape2 = currCross1.makeShape();
+    clippedShapes[i] = currShape1;
     
-    currShape.rotate(sin(i/TWO_PI*density));
-    currShape.translate(i,i);
+    currShape1.rotate(sin(i/TWO_PI*density));
+    currShape1.translate(i+70,i);
     if(isFirst == false) {
        for(int j = i; j>0; j--) {
            clippedShapes[i-j] = clippedShapes[i-j].diff(clippedShapes[i]);   
