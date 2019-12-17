@@ -1,11 +1,11 @@
 import geomerative.*;
 import processing.pdf.*;
 
-Cross currCross1, currCross2;
+Cross currCross;
 boolean isFirst = true;
 int count =420;
 int spacing =2;
-float density = 0.85;
+float density = 0.45;
 
 
 float translateX = width*3;
@@ -13,13 +13,13 @@ float translateY = height/5;
 
 int p =0;
 
-RPolygon currShape1, currShape2,clippedShape;
+RPolygon currShape,clippedShape;
 RPolygon[] clippedShapes = new RPolygon[count];
 
 void setup() {
- size(900, 900, PDF, "CrossPositionedOrigin_2.pdf");
+ //size(900, 900, PDF, "CrossPositionedOrigin_3.pdf");
   //size(750, 700, PDF, "crossGraphicsFinal_3.svg");
-  //size(900, 900);
+   size(900, 900);
   RG.init(this);
   rectMode(CENTER);
   background(255);
@@ -32,7 +32,7 @@ void setup() {
 void draw() {
    scale(2);
    drawShapes();
-  exit();
+  //exit();
 }
 
 void drawShapes(){
@@ -47,12 +47,12 @@ void drawShapes(){
 void eliminateIntersections() {
 
  for(int i=0; i<count; i+=1){
-    currCross1 = new Cross(0 ,0);
-    currShape1 = currCross1.makeShape(); 
-    clippedShapes[i] = currShape1;
+    currCross = new Cross(0 ,0);
+    currShape = currCross.makeShape(); 
+    clippedShapes[i] = currShape;
      
-    currShape1.rotate(cos(i/TWO_PI*density));
-    currShape1.translate(i,i);
+    currShape.rotate(cos(i/TWO_PI*density));
+    currShape.translate(i,i);
    
     if(isFirst == false) {
        for(int j = i; j>0; j--) {
